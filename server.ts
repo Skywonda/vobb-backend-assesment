@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
-import config from './shared/config';
-import { logger } from './shared/utils/logger.service';
-import { validateEnv } from './shared/config/env.validation';
-import { getApp, initialize } from './app';
+import config from './src/shared/config/index';
+import { logger } from './src/shared/utils/logger.service';
+import { validateEnv } from './src/shared/config/env.validation';
+import { getApp, initialize } from './src/app';
 
 validateEnv();
 
@@ -30,7 +30,7 @@ const startServer = async (): Promise<void> => {
   try {
     await connectToDatabase();
     await initialize();
-    
+
     const app = getApp();
     app.listen(config.server.port, config.server.host, () => {
       logger.info(`Server running on http://${config.server.host}:${config.server.port}`);
