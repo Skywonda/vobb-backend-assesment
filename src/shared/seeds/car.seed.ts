@@ -1,5 +1,5 @@
 
-import { Manager } from '@/modules/managers/models/manager.model';
+import { Manager } from '../../modules/managers/models/manager.model';
 import { Car } from '../../modules/cars/models/car.model';
 import { seedCategories } from './category.seed';
 import { PasswordUtil } from '../utils/password.util';
