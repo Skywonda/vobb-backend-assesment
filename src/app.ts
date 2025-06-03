@@ -14,6 +14,7 @@ import { customerRouter } from "./modules/customers/customers.routes";
 import { ResponseHandler } from "./shared/utils/response.handler";
 import config from './shared/config';
 import { requestLogger } from './shared/middleware/request-logger.middleware';
+import { orderRouter } from "./modules/orders/orders.routes";
 
 const app = express();
 
@@ -46,6 +47,7 @@ const router = express.Router();
 router.use('/cars', carsRouter);
 router.use('/managers', managerRouter);
 router.use('/customers', customerRouter);
+router.use('/orders', orderRouter);
 
 // Apply the router with the global prefix
 app.use(config.api.prefix, router);
