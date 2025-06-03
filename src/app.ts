@@ -3,8 +3,6 @@ import cors from "cors";
 import helmet from 'helmet';
 import compression from 'compression';
 import rateLimit from 'express-rate-limit';
-import { APIToolkit } from "apitoolkit-express";
-import axios from "axios";
 
 import { connectDatabase } from "./shared/database/database";
 import { logger } from "./shared/utils/logger.service";
