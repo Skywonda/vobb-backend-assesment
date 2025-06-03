@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
-import config from './src/shared/config/index';
-import { logger } from './src/shared/utils/logger.service';
-import { validateEnv } from './src/shared/config/env.validation';
-import { getApp, initialize } from './src/app';
+import config from './shared/config/index';
+import { logger } from './shared/utils/logger.service';
+import { validateEnv } from './shared/config/env.validation';
+import { getApp, initialize } from './app';
 
 validateEnv();
 
