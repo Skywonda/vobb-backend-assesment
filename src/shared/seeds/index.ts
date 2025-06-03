@@ -16,11 +16,8 @@ const seedDatabase = async () => {
     await mongoose.connect(mongoUri);
     console.log('📦 Connected to MongoDB');
 
-    // Create a dummy manager ID for seeding
-    const managerId = new mongoose.Types.ObjectId().toString();
 
-    // Seed cars (which will also seed categories)
-    await seedCars(managerId);
+    await seedCars();
 
     console.log('✨ Database seeding completed successfully');
     process.exit(0);

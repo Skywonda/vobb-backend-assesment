@@ -1,11 +1,39 @@
-import mongoose from 'mongoose';
-import { Car } from '../../modules/cars/models/car.model';
-import { Category } from '../../modules/cars/models/category.model';
-import { seedCategories } from './category.seed';
 
-export const seedCars = async (managerId: string) => {
+import { Manager } from '@/modules/managers/models/manager.model';
+import { Car } from '../../modules/cars/models/car.model';
+import { seedCategories } from './category.seed';
+import { PasswordUtil } from '../utils/password.util';
+
+const getOrCreateManager = async (): Promise<string> => {
   try {
-    // First seed categories and get their IDs
+    const existingManager = await Manager.findOne();
+
+    if (existingManager) {
+      console.log(`✅ Using existing manager: ${existingManager.name} (${existingManager.email})`);
+      return existingManager.id;
+    }
+
+    console.log('📝 Creating dummy manager for seeding...');
+    const hashedPassword = await PasswordUtil.hash('password123');
+
+    const dummyManager = await Manager.create({
+      name: 'Seed Manager',
+      email: 'manager@seeddata.com',
+      password: hashedPassword,
+      isActive: true,
+    });
+
+    console.log(`✅ Created dummy manager: ${dummyManager.name} (${dummyManager.email})`);
+    return dummyManager.id;
+  } catch (error) {
+    console.error('❌ Error getting or creating manager:', error);
+    throw error;
+  }
+};
+
+export const seedCars = async () => {
+  try {
+    const managerId = await getOrCreateManager();
     const categories = await seedCategories();
     const categoryMap = new Map(categories.map(cat => [cat.name, cat._id]));
 
