@@ -1,0 +1,841 @@
+{
+  "info": {
+    "_postman_id": "b0e7b5e2-8f3a-4b3c-a752-c8f7e8f9b8a7",
+    "name": "VOBB API",
+    "description": "Complete API collection for VOBB car dealership system",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "auth_token",
+      "value": "your_token_here",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Categories",
+      "item": [
+        {
+          "name": "Get All Categories",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/cars/categories",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cars",
+                "categories"
+              ]
+            },
+            "description": "Get a list of all active categories"
+          }
+        },
+        {
+          "name": "Get Category by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/cars/categories/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cars",
+                "categories",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "",
+                  "description": "Category ID"
+                }
+              ]
+            },
+            "description": "Get detailed information about a specific category"
+          }
+        },
+        {
+          "name": "Create Category",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"SUV\",\n    \"description\": \"Sport Utility Vehicle category for spacious family cars\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/cars/categories",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cars",
+                "categories"
+              ]
+            },
+            "description": "Create a new category (Manager only)"
+          }
+        },
+        {
+          "name": "Update Category",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"SUV & Crossover\",\n    \"description\": \"Sport Utility Vehicles and Crossovers for family use\",\n    \"isActive\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/cars/categories/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cars",
+                "categories",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "",
+                  "description": "Category ID"
+                }
+              ]
+            },
+            "description": "Update an existing category (Manager only)"
+          }
+        },
+        {
+          "name": "Delete Category",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/cars/categories/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cars",
+                "categories",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "",
+                  "description": "Category ID"
+                }
+              ]
+            },
+            "description": "Soft delete a category (Manager only)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cars",
+      "item": [
+        {
+          "name": "Get All Cars",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/cars?page=1&limit=10&brand=&modelName=&category=&available=&year=&minPrice=&maxPrice=&transmission=&fuelType=&condition=&sort=",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cars"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number"
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Items per page"
+                },
+                {
+                  "key": "brand",
+                  "value": "",
+                  "description": "Filter by car brand"
+                },
+                {
+                  "key": "modelName",
+                  "value": "",
+                  "description": "Filter by model name"
+                },
+                {
+                  "key": "category",
+                  "value": "",
+                  "description": "Filter by category"
+                },
+                {
+                  "key": "available",
+                  "value": "",
+                  "description": "Filter by availability (true/false)"
+                },
+                {
+                  "key": "year",
+                  "value": "",
+                  "description": "Filter by year"
+                },
+                {
+                  "key": "minPrice",
+                  "value": "",
+                  "description": "Filter by minimum price"
+                },
+                {
+                  "key": "maxPrice",
+                  "value": "",
+                  "description": "Filter by maximum price"
+                },
+                {
+                  "key": "transmission",
+                  "value": "",
+                  "description": "Filter by transmission type (manual/automatic)"
+                },
+                {
+                  "key": "fuelType",
+                  "value": "",
+                  "description": "Filter by fuel type (petrol/diesel/electric/hybrid)"
+                },
+                {
+                  "key": "condition",
+                  "value": "",
+                  "description": "Filter by condition (new/used)"
+                },
+                {
+                  "key": "sort",
+                  "value": "",
+                  "description": "Sort field and direction"
+                }
+              ]
+            },
+            "description": "Get a paginated list of all cars with optional filters"
+          }
+        },
+        {
+          "name": "Get Car by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/cars/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cars",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "",
+                  "description": "Car ID"
+                }
+              ]
+            },
+            "description": "Get detailed information about a specific car"
+          }
+        },
+        {
+          "name": "Create Car",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"brand\": \"Toyota\",\n    \"modelName\": \"Camry\",\n    \"year\": 2024,\n    \"price\": 35000,\n    \"category\": \"{{categoryId}}\",\n    \"transmission\": \"automatic\",\n    \"fuelType\": \"hybrid\",\n    \"engineSize\": 2.5,\n    \"color\": \"Midnight Blue\",\n    \"vin\": \"1HGCM82633A123456\",\n    \"available\": true,\n    \"condition\": \"new\",\n    \"quantity\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/cars",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cars"
+              ]
+            },
+            "description": "Create a new car entry (Manager only). Note: You need to first create a category and use its ID in the category field."
+          }
+        },
+        {
+          "name": "Update Car",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"brand\": \"Toyota\",\n    \"modelName\": \"Camry\",\n    \"year\": 2022,\n    \"price\": 25000,\n    \"mileage\": 15000,\n    \"available\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/cars/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cars",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "",
+                  "description": "Car ID"
+                }
+              ]
+            },
+            "description": "Update an existing car's information (Manager only)"
+          }
+        },
+        {
+          "name": "Delete Car",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/cars/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cars",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "",
+                  "description": "Car ID"
+                }
+              ]
+            },
+            "description": "Delete a car from the system (Manager only)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Customers",
+      "item": [
+        {
+          "name": "Register Customer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"customer@example.com\",\n    \"password\": \"password123\",\n    \"name\": \"John Doe\",\n    \"phone\": \"+1234567890\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/customers/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "customers",
+                "register"
+              ]
+            },
+            "description": "Register a new customer account"
+          }
+        },
+        {
+          "name": "Login Customer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"customer@example.com\",\n    \"password\": \"password123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/customers/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "customers",
+                "login"
+              ]
+            },
+            "description": "Login to customer account"
+          }
+        },
+        {
+          "name": "Get Customer Profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/customers/profile",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "customers",
+                "profile"
+              ]
+            },
+            "description": "Get customer profile information"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Managers",
+      "item": [
+        {
+          "name": "Register Manager",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"manager@example.com\",\n    \"password\": \"password123\",\n    \"name\": \"Jane Manager\",\n    \"phoneNumber\": \"+1234567890\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/managers/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "managers",
+                "register"
+              ]
+            },
+            "description": "Register a new manager account"
+          }
+        },
+        {
+          "name": "Login Manager",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"manager@example.com\",\n    \"password\": \"password123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/managers/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "managers",
+                "login"
+              ]
+            },
+            "description": "Login to manager account"
+          }
+        },
+        {
+          "name": "Get Manager Profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/managers/profile",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "managers",
+                "profile"
+              ]
+            },
+            "description": "Get manager profile information"
+          }
+        },
+        {
+          "name": "Update Manager Profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Jane Updated Manager\",\n    \"phoneNumber\": \"+9876543210\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/managers/profile",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "managers",
+                "profile"
+              ]
+            },
+            "description": "Update manager profile information"
+          }
+        },
+        {
+          "name": "Change Manager Password",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"currentPassword\": \"oldpassword123\",\n    \"newPassword\": \"newpassword123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/managers/change-password",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "managers",
+                "change-password"
+              ]
+            },
+            "description": "Change manager password"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "Create Order",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"carId\": \"car_id_here\",\n    \"quantity\": 1,\n    \"notes\": \"Optional notes about the order\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/orders",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orders"
+              ]
+            },
+            "description": "Create a new order (Customer only)"
+          }
+        },
+        {
+          "name": "Get All Orders",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/orders",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orders"
+              ]
+            },
+            "description": "Get all orders (filtered by role - customers see their orders, managers see all)"
+          }
+        },
+        {
+          "name": "Get Order by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/orders/:orderId",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orders",
+                ":orderId"
+              ],
+              "variable": [
+                {
+                  "key": "orderId",
+                  "value": "",
+                  "description": "Order ID"
+                }
+              ]
+            },
+            "description": "Get detailed information about a specific order"
+          }
+        },
+        {
+          "name": "Update Order Status",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{auth_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"status\": \"approved\",\n    \"notes\": \"Order approved and ready for processing\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/orders/:orderId/status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orders",
+                ":orderId",
+                "status"
+              ],
+              "variable": [
+                {
+                  "key": "orderId",
+                  "value": "",
+                  "description": "Order ID"
+                }
+              ]
+            },
+            "description": "Update order status (Manager only)"
+          }
+        }
+      ]
+    }
+  ]
+}
