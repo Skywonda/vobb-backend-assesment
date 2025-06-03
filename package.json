@@ -4,10 +4,9 @@
   "description": "Car Dealership Backend System",
   "main": "dist/server.js",
   "scripts": {
-    "start": "node ./dist/server.js",
+    "start": "node dist/server.js",
     "dev": "nodemon src/server.ts",
-    "build": "tsc",
-    "prebuild": "rm -rf dist",
+    "build": "rm -rf dist && tsc && ls -la dist/",
     "lint": "eslint . --ext .ts",
     "test": "jest",
     "test:watch": "jest --watchAll",
